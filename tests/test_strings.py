@@ -1,20 +1,30 @@
-# 2022 A Jarman
+"""Tests for various string algorithms"""
+from typing import Callable
 import pytest
-from src.strings import word_reverser_builtins
-
-REVERSE_STRING_TEST_CASES = [
-    ("Hello World", "World Hello"),
-    ("I am an antelope", "antelope an am I"),
-    ("",""),
-]
+from src.strings import WordReversers
 
 
-@pytest.mark.parametrize("phrase, answer", REVERSE_STRING_TEST_CASES)
-def test_word_reversers(phrase: str, answer: str):
-    """Tests word reverser function
+class TestWordReversers:
+    """Collection of tests for string reverse functions"""
 
-    Args:
-        phrase (str): phrase to be tested
-        answer (str): correct answer to test case
-    """
-    assert word_reverser_builtins(phrase) == answer
+    @pytest.mark.parametrize(
+        "phrase, answer",
+        [
+            ("Hello World", "World Hello"),
+            ("I am an antelope", "antelope an am I"),
+            ("", ""),
+            ("This is your life", "life your is This"),
+        ],
+    )
+    @pytest.mark.parametrize(
+        "function",
+        [WordReversers.word_reverser_builtins, WordReversers.word_reverser_iterative],
+    )
+    def test_word_reverser_builtins(self, phrase: str, answer: str, function: Callable):
+        """Tests word reverser function
+
+        Args:
+            phrase (str): phrase to be tested
+            answer (str): correct answer to test case
+        """
+        assert function(phrase) == answer
