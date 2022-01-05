@@ -54,6 +54,13 @@ class DoubleLinkedNode(SingleLinkNode):
         next_node: Optional[Type["SingleLinkNode"]] = None,
         prev_node: Optional["DoubleLinkedNode"] = None,
     ) -> None:
+        """[summary]
+
+        Args:
+            value (Any): [description]
+            next_node (Optional[Type[, optional): [description]. Defaults to None.
+            prev_node (Optional[, optional): [description]. Defaults to None.
+        """
 
         super(DoubleLinkedNode, self).__init__(value=value, next_node=next_node)
         self.prev_node = prev_node
