@@ -109,9 +109,14 @@ class LinkedList:
             str: [description]
         """
         string: str = ""
+        node_index = 0
         current_node: Type[SinglyLinkedNode] = self.head_node
         while current_node:
-            string += str(current_node.value)
+            if node_index == 0:
+                tag = "(head)"
+            else:
+                tag = ""
+            string += f"[{node_index}]{tag}: {str(current_node)}  "
             current_node = current_node.next_node
 
         return string
