@@ -8,11 +8,13 @@ class SinglyLinkedNode:
     """
 
     def __init__(self, value: Any, next_node: Optional[Type["SingleLinkNode"]] = None):
-        self._value = value
-        self._next_node = next_node
+
+
+        self.value: Any = value
+        self.next_node: Optional[Type["SingleLinkNode"]] = next_node
 
     @property
-    def next_node(self) -> Type["SingleLinkNode"]:
+    def next_node(self) -> Optional[Type["SingleLinkNode"]]:
         """returns linked node
 
         Returns:
@@ -31,15 +33,9 @@ class SinglyLinkedNode:
         Raises:
             TypeError: will raise an error if invalid class.
         """
-        # """Set the link node variable
 
-        # Args:
-        #     next_node, Type["SingleLinkNode"]: node to be linked
-        # """
-
-
-        if isinstance(node, self.__class__):
-            # check if this is the same as this class 
+        if isinstance(node, self.__class__) or node is None:
+            # check if this is the same as this class
             # (inherited in subclasses)
             self._next_node = node
         else:
@@ -57,10 +53,10 @@ class SinglyLinkedNode:
 
     @value.setter
     def value(self, value: Any) -> None:
-        """Set the value of this Node
+        """ Setter for the value
 
-        Returns:
-            None
+        Args:
+            value (Any): any value that will be this nodes' data
         """
         self._value = value
 
@@ -86,7 +82,7 @@ class DoubleLinkedNode(SinglyLinkedNode):
 
         super(DoubleLinkedNode, self).__init__(
             value=value, next_node=next_node)
-        self._prev_node = prev_node
+        self.prev_node = prev_node
 
     @property
     def prev_node(self) -> Type["DoubleLinkedNode"]:
@@ -98,15 +94,15 @@ class DoubleLinkedNode(SinglyLinkedNode):
         return self._prev_node
 
     @prev_node.setter
-    def prev_node(self, node: Type["DoubleLinkedNode"]) -> None:
+    def prev_node(self, node: Optional[Type["DoubleLinkedNode"]]) -> None:
         """Set the link node variable
 
         Args:
             node, Type["SingleLinkNode"]: node to be linked
         """
 
-        if isinstance(node, self.__class__):
-            # check if this is the same as this class 
+        if isinstance(node, self.__class__) or node is None:
+            # check if this is the same as this class
             # (inherited in subclasses)
             self._prev_node = node
         else:
