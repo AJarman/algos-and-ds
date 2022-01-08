@@ -1,5 +1,5 @@
 """Linked List implementations"""
-from typing import Any, Type
+from typing import Any, Type, Optional
 from .nodes import SinglyLinkedNode
 
 
@@ -14,7 +14,7 @@ class LinkedList:
         Args:
             head_value (Any): value of any type to be the head
         """
-        self._head_node = SinglyLinkedNode(head_value)
+        self.head_node = SinglyLinkedNode(head_value)
 
     @property
     def head_node(self) -> Type[SinglyLinkedNode]:
@@ -36,7 +36,7 @@ class LinkedList:
         Raises:
             TypeError: this is raised if new_node is not a SinglyLinkedNode
         """
-        if isinstance(new_node, Type[SinglyLinkedNode]):
+        if isinstance(new_node, Type[SinglyLinkedNode]) or new_node is None:
             self._head_node = new_node
         else:
             raise TypeError(
@@ -55,19 +55,30 @@ class LinkedList:
             value=new_node_value, next_node=self.head_node)
         self.head_node = new_node
 
-    # def remove_node(self, value_to_remove:Any)->None:
+    def remove_node(self, value_to_remove:Any)->None:
+        """
+        Remove all nodes with this value.
 
-    #     # start at the head
-    #     current_node = self.get_head_node()
-    #     # if
-    #     if current_node.value == value_to_remove:
-    #         self.head_node = current_node.next_node
-    #     else:
-    #         while current_node: # is not None
-    #             next_node = current_node.next_node
-    #             if next_node and next_node.value == value_to_remove:
-    #                 next_next_node = next_node.next_node
-    #                 current_node.next_node = next_next_node
-    #             current_node = next_next_node
-    #             else:
-    #             current_node = next_node
+        Args:
+            value_to_remove (Any): [description]
+        """
+
+        # start at the head
+        current_node = self.head_node
+        # if the head is to be removed
+        # remove
+        if current_node.value == value_to_remove:
+            self.head_node = current_node.next_node
+        else:
+            while current_node: # is not None (a)
+                # look at the next node (b)
+                next_node:Optional[Type[SinglyLinkedNode]] = current_node.next_node
+                # if it matches the value to remove and is not none
+                if next_node and next_node.value == value_to_remove:
+                # change nodes from a > b > c
+                # to a > c
+                    current_node.next_node = next_node.next_node
+                    # then start the check from c
+                    current_node = next_node.next_node
+                else:
+                    current_node = next_node
