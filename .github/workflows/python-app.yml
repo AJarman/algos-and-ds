@@ -34,13 +34,20 @@ jobs:
     - name: Test with pytest and coverage
       run: |
         pytest --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov=com --cov-report=xml
+    
+    
     - name: Publish Unit Test Results for ${{ matrix.python-version }}-${{ matrix.runs-on }}
+      if: ${{ matrix.runs-on == ubuntu-latest }}
       uses: EnricoMi/publish-unit-test-result-action@v1
-      if: always()
       with:
-        files: junit/test-results-${{ matrix.python-version }}-${{ matrix.runs-on }}.xml
+        files: test-results/**/*.xml
+    - name: Publish Unit Test Results for ${{ matrix.python-version }}-${{ matrix.runs-on }}
+      if: ${{ matrix.runs-on == macos-latest }}
+      uses: EnricoMi/publish-unit-test-result-action/composite@v1
+      with:
+        files: test-results/**/*.xml
     - name: Upload pytest test results
       uses: actions/upload-artifact@v2
       with:
         name: pytest-results-${{ matrix.python-version }}-${{ matrix.runs-on }}
-        path: junit/test-results-${{ matrix.python-version }}-${{ matrix.runs-on }}.html
+        path: junit/test-results-${{ matrix.python-version }}-${{ matrix.runs-on }}.xml
