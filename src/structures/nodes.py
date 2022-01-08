@@ -67,7 +67,13 @@ class SinglyLinkedNode:
         Returns:
             str: Value and Next nodes' value
         """
-        return f"Value: \'{str(self.value)}\', Next Node: \'{str(self.next_node.value)}\'"
+        string:str= f"Value: \'{str(self.value)}\', Next Node: "
+        if self.next_node:
+            string += f"\'{str(self.next_node.value)}\'"
+        else:
+            string += "None"
+
+        return string
 
 
 
@@ -127,4 +133,10 @@ class DoubleLinkedNode(SinglyLinkedNode):
         Returns:
             str: Value of node, next node and previous node.
         """
-        return f"{super().__str__()}, Previous Node: \'{str(self.prev_node.value)}\'"
+        string:str= f"{super().__str__()}, Previous Node: "
+        if self.prev_node:
+            string += f"\'{str(self.prev_node.value)}\'"
+        else:
+            string += "None"
+
+        return string

@@ -116,7 +116,8 @@ class LinkedList:
                 tag = "(head)"
             else:
                 tag = ""
-            string += f"[{node_index}]{tag}: {str(current_node)}  "
+            string += f"[{node_index}]{tag}: {str(current_node)}"
             current_node = current_node.next_node
+            node_index += 1
 
         return string
