@@ -9,7 +9,6 @@ class SinglyLinkedNode:
 
     def __init__(self, value: Any, next_node: Optional[Type["SinglyLinkedNode"]] = None):
 
-
         self.value: Any = value
         self.next_node: Optional[Type["SinglyLinkedNode"]] = next_node
 
@@ -60,21 +59,20 @@ class SinglyLinkedNode:
         """
         self._value = value
 
-    def __str__(self)->str:
+    def __str__(self) -> str:
         """
         Node representation as a string, uses superclass
 
         Returns:
             str: Value and Next nodes' value
         """
-        string:str= f"Value: \'{str(self.value)}\', Next Node: "
+        string: str = f"Value: \'{str(self.value)}\', Next Node: "
         if self.next_node:
             string += f"\'{str(self.next_node.value)}\'"
         else:
             string += "None"
 
         return string
-
 
 
 class DoubleLinkedNode(SinglyLinkedNode):
@@ -125,15 +123,14 @@ class DoubleLinkedNode(SinglyLinkedNode):
             raise TypeError(
                 f"new node: {str(node)} is not a compatible Node")
 
-
-    def __str__(self)->str:
+    def __str__(self) -> str:
         """
         Node representation as a string, uses superclass
 
         Returns:
             str: Value of node, next node and previous node.
         """
-        string:str= f"{super().__str__()}, Previous Node: "
+        string: str = f"{super().__str__()}, Previous Node: "
         if self.prev_node:
             string += f"\'{str(self.prev_node.value)}\' "
         else:
