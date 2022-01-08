@@ -60,6 +60,16 @@ class SinglyLinkedNode:
         """
         self._value = value
 
+    def __str__(self)->str:
+        """
+        Node representation as a string, uses superclass
+
+        Returns:
+            str: Value and Next nodes' value
+        """
+        return f"Value: \'{str(self.value)}\', Next Node: \'{str(self.next_node.value)}\'"
+
+
 
 class DoubleLinkedNode(SinglyLinkedNode):
     """
@@ -80,7 +90,7 @@ class DoubleLinkedNode(SinglyLinkedNode):
             prev_node (Optional[, optional): [description]. Defaults to None.
         """
 
-        super(DoubleLinkedNode, self).__init__(
+        super().__init__(
             value=value, next_node=next_node)
         self.prev_node = prev_node
 
@@ -108,3 +118,13 @@ class DoubleLinkedNode(SinglyLinkedNode):
         else:
             raise TypeError(
                 f"new node: {str(node)} is not a compatible Node")
+
+
+    def __str__(self)->str:
+        """
+        Node representation as a string, uses superclass
+
+        Returns:
+            str: Value of node, next node and previous node.
+        """
+        return f"{super().__str__()}, Previous Node: \'{str(self.prev_node.value)}\'"
