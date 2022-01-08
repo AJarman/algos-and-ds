@@ -87,7 +87,7 @@ class LinkedList:
                 else:
                     current_node = next_node
 
-    def __len__(self)->int:
+    def __len__(self) -> int:
         """
         Calculates number of nodes
 
@@ -97,7 +97,21 @@ class LinkedList:
         length = 0
         current_node = self.head_node
         while current_node:
-            length +=1
+            length += 1
             current_node = current_node.next_node
 
         return length
+
+    def __str__(self) -> str:
+        """[summary]
+
+        Returns:
+            str: [description]
+        """
+        string: str = ""
+        current_node: Type[SinglyLinkedNode] = self.head_node
+        while current_node:
+            string += str(current_node.value)
+            current_node = current_node.next_node
+
+        return string
