@@ -7,14 +7,14 @@ class SinglyLinkedNode:
     Singly linked Node
     """
 
-    def __init__(self, value: Any, next_node: Optional[Type["SingleLinkNode"]] = None):
+    def __init__(self, value: Any, next_node: Optional[Type["SinglyLinkedNode"]] = None):
 
 
         self.value: Any = value
-        self.next_node: Optional[Type["SingleLinkNode"]] = next_node
+        self.next_node: Optional[Type["SinglyLinkedNode"]] = next_node
 
     @property
-    def next_node(self) -> Optional[Type["SingleLinkNode"]]:
+    def next_node(self) -> Optional[Type["SinglyLinkedNode"]]:
         """returns linked node
 
         Returns:
@@ -23,11 +23,11 @@ class SinglyLinkedNode:
         return self._next_node
 
     @next_node.setter
-    def next_node(self, node: Type["SingleLinkNode"]) -> None:
+    def next_node(self, node: Type["SinglyLinkedNode"]) -> None:
         """Set the next node variable, will type check the next_node
 
         Args:
-            node (Type[SingleLinkNode]): same as this class
+            node (Type[SinglyLinkedNode]): same as this class
             or subclass of this class.
 
         Raises:
@@ -69,7 +69,7 @@ class DoubleLinkedNode(SinglyLinkedNode):
     def __init__(
         self,
         value: Any,
-        next_node: Optional[Type["SingleLinkNode"]] = None,
+        next_node: Optional[Type["SinglyLinkedNode"]] = None,
         prev_node: Optional["DoubleLinkedNode"] = None,
     ) -> None:
         """Constructor of Doubly linked node
@@ -98,7 +98,7 @@ class DoubleLinkedNode(SinglyLinkedNode):
         """Set the link node variable
 
         Args:
-            node, Type["SingleLinkNode"]: node to be linked
+            node, Type["DoubleLinkedNode"]: node to be linked
         """
 
         if isinstance(node, self.__class__) or node is None:
