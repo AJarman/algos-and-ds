@@ -135,7 +135,7 @@ class DoubleLinkedNode(SinglyLinkedNode):
         """
         string:str= f"{super().__str__()}, Previous Node: "
         if self.prev_node:
-            string += f"\'{str(self.prev_node.value)}\'"
+            string += f"\'{str(self.prev_node.value)}\' "
         else:
             string += "None"
 
