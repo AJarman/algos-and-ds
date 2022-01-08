@@ -11,7 +11,7 @@ def node_values_for_tests() -> List[Any]:
     Returns:
         List[Any]: [
     """
-    return [1, 2, 3, 4, 5, 6, 7, "spam", None, "sausage"]
+    return [1, 2, 3, 4, 5, 6, 7, "spam", "sausage"]
 
 
 def list_of_nodes_for_tests() -> List[SinglyLinkedNode]:
@@ -37,8 +37,9 @@ def test_sll_node_constructor(value):
     assert isinstance(new_node, SinglyLinkedNode)
     # check value is correct
     assert new_node.value == value
-    #check linked value is correct
+    # check linked value is correct
     assert new_node.next_node.value == "Dumbo"
+
 
 @pytest.mark.parametrize("value", node_values_for_tests())
 def test_sll_node_constructor_no_link(value):
@@ -52,6 +53,19 @@ def test_sll_node_constructor_no_link(value):
     assert isinstance(new_node, SinglyLinkedNode)
     # check value is correct
     assert new_node.value == value
+
+
+@pytest.mark.parametrize("value", node_values_for_tests())
+def test_sll_node_constructor_invalid_link(value):
+    """[summary]
+
+    Args:
+        value (any): [description]
+    """
+    the_next_node: Any = value
+    # check instance raises error
+    with pytest.raises(TypeError):
+        SinglyLinkedNode(value, next_node=the_next_node)
 
 
 @pytest.mark.parametrize("value", node_values_for_tests())
@@ -109,7 +123,7 @@ def test_sll_node_set_next_node(value):
     test_next_node = SinglyLinkedNode(value)
     # create 2nd node
     new_node = SinglyLinkedNode("tomato")
-    #create link
+    # create link
     new_node.next_node = test_next_node
 
     assert new_node.next_node.value == value

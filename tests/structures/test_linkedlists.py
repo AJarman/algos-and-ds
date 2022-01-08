@@ -11,7 +11,7 @@ def node_values_for_tests():
     Returns:
         List[Any]: possible node values
     """
-    return [1, 3, 5, 7, "hello", None]
+    return [1, 3, 5, 7, "hello"]
 
 
 @pytest.mark.parametrize("node_value", node_values_for_tests())
