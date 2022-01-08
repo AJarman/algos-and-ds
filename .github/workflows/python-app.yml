@@ -37,12 +37,12 @@ jobs:
     
     
     - name: Publish Unit Test Results for ${{ matrix.python-version }}-${{ matrix.runs-on }}
-      if: ${{ matrix.runs-on == "ubuntu-latest" }}
+      if: matrix.runs-on == 'ubuntu-latest'
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         files: test-results/**/*.xml
     - name: Publish Unit Test Results for ${{ matrix.python-version }}-${{ matrix.runs-on }}
-      if: ${{ matrix.runs-on == "macos-latest" }}
+      if: matrix.runs-on == 'macos-latest'
       uses: EnricoMi/publish-unit-test-result-action/composite@v1
       with:
         files: test-results/**/*.xml
