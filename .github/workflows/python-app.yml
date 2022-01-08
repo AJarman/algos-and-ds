@@ -40,12 +40,12 @@ jobs:
       if: matrix.runs-on == 'ubuntu-latest'
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
-        files: test-results/**/*.xml
+        files: junit/*.xml
     - name: Publish Unit Test Results for ${{ matrix.python-version }}-${{ matrix.runs-on }}
       if: matrix.runs-on == 'macos-latest'
       uses: EnricoMi/publish-unit-test-result-action/composite@v1
       with:
-        files: test-results/**/*.xml
+        files: junit/*.xml
     - name: Upload pytest test results
       uses: actions/upload-artifact@v2
       with:
