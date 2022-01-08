@@ -56,6 +56,9 @@ def test_linkedlist_add_to_head(node_value: Any):
 
 
 def test_linkedlist__len__():
+    """
+    tests the length method/dunder method
+    """
 
     new_linkedlist = LinkedList(head_value="testhead")
     for i in node_values_for_tests():
@@ -65,6 +68,11 @@ def test_linkedlist__len__():
 
 @pytest.mark.parametrize("node_value", node_values_for_tests())
 def test_linkedlist_remove_values(node_value:Any):
+    """
+    Testing the removed values (1) are removed.
+    Args:
+        node_value (Any): [description]
+    """
 
     new_linkedlist = LinkedList(head_value="testhead")
     for i in node_values_for_tests():
