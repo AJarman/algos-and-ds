@@ -24,6 +24,7 @@ class WordReversers:
         """
 
         # approach here is to identify
+        # added a comment here for demo
 
         # split into list of strings by empty space character
         words: List[str] = phrase.split(" ")  # O(?)
