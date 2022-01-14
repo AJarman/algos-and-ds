@@ -132,6 +132,32 @@ class TestSingleLinkedNode:
 
         assert new_node.next_node.value == value
 
+    @staticmethod
+    def test__str__():
+        """[summary]
+
+        Args:
+            value (any): [description]
+        """
+        # create node
+        test_node = SinglyLinkedNode("potato")
+        node_string = str(test_node)
+
+        assert isinstance(node_string,str)
+
+    @staticmethod
+    def test__repr__():
+        """[summary]
+
+        Args:
+            value (any): [description]
+        """
+        # create node
+        test_node = DoubleLinkedNode("potato")
+        node_string = repr(test_node)
+
+        assert isinstance(node_string,str)
+
 
 class TestDoubleLinkedNode:
     """
@@ -189,3 +215,20 @@ class TestDoubleLinkedNode:
         # check instance raises error
         with pytest.raises(TypeError):
             DoubleLinkedNode(value, prev_node=the_next_node)
+
+    @staticmethod
+    def test__str__():
+        """[summary]
+
+        Args:
+            value (any): [description]
+        """
+        # create node
+        test_node = DoubleLinkedNode("potato")
+        second_node =DoubleLinkedNode("tomato")
+        test_node.next_node = second_node
+        second_node.prev_node = test_node
+        node_string_1 = str(test_node)
+        node_string_2 = str(second_node)
+        assert isinstance(node_string_1,str)
+        assert isinstance(node_string_2,str)
