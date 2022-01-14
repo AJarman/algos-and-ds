@@ -75,6 +75,10 @@ class SinglyLinkedNode:
         return string
 
 
+    def __repr__(self):
+        return f"<Instance of {self.__class__.__name__} class, {self.__str__()}>"
+
+
 class DoubleLinkedNode(SinglyLinkedNode):
     """
     Doubly linked Node
