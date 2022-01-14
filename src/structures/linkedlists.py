@@ -122,6 +122,30 @@ class LinkedList:
 
         return string
 
+    def __iter__(self):
+
+        current = self.head_node
+        while current:
+            yield current
+            current = current.next_node
+
+    def __getitem__(self, index: int):
+
+        while index < 0:
+            # Index is a negative, so addition will subtract.
+            index += len(self)
+        if index >= len(self):
+            raise IndexError(f"Index of {index} is out of "
+                             f"range for {self.__class__.__name__} of length {len(self)}")
+
+        current_index: int = 0
+        current = self.head_node
+        while current:
+            if index == current_index:
+                return current
+            current_index += 1
+            current = current.next_node
+
 
 class DoublyLinkedList(LinkedList):
     """
@@ -159,7 +183,7 @@ class DoublyLinkedList(LinkedList):
             TypeError: this is raised if new_node is not a DoubleLinkedNode
         """
         if (isinstance(new_node, DoubleLinkedNode)
-            or new_node is None):
+                or new_node is None):
             self._tail_node = new_node
         else:
             raise TypeError(
@@ -217,8 +241,8 @@ class DoublyLinkedList(LinkedList):
         Returns:
             str: [description]
         """
-        string:str = super().__str__()
+        string: str = super().__str__()
         last_node = len(self) - 1
         insert_index = string.find(f"[{last_node}]") + 4
-        string =  string[:insert_index] + "(tail)" + string[insert_index:]
+        string = string[:insert_index] + "(tail)" + string[insert_index:]
         return string
