@@ -52,6 +52,28 @@ class DoublyLinkedList(LinkedList):
             raise TypeError(
                 f"new node: {str(new_node)} is not a compatible Node")
 
+    def __str__(self) -> str:
+        """
+        Creates String represenation of the class.
+        time - O(n) - O(2n) - calls superclass and then iterates again.
+        space - O(1) - Some objects created however should be < n
+
+        Returns:
+            str: [description]
+        """
+        # call superclass
+        string: str = super().__str__()
+        string += "(t)"
+
+        inserts_i: List[int] = []
+        for index, char in enumerate(string):
+            if char == "-" and string[index+1] == "-":
+                inserts_i.append(index)
+        for i in reversed(inserts_i):
+            string = string[:i] + "p<" + string[i:]
+
+        return string
+
     def add_to_head(self, new_node_value: Any) -> None:
         """
         Creates a new head node containing this value,
@@ -167,7 +189,6 @@ class DoublyLinkedList(LinkedList):
             self.tail_node = node1
         else:
             node2_next.prev_node = node1
-        
 
         # create a temp node otherwise becomes infinite loop!
         temp = node1.next_node
@@ -179,25 +200,3 @@ class DoublyLinkedList(LinkedList):
         node2.prev_node = temp2
 
         return
-
-    def __str__(self) -> str:
-        """
-        Creates String represenation of the class.
-        time - O(n) - O(2n) - calls superclass and then iterates again.
-        space - O(1) - Some objects created however should be < n
-
-        Returns:
-            str: [description]
-        """
-        # call superclass
-        string: str = super().__str__()
-        string += "(t)"
-
-        inserts_i: List[int] = []
-        for index, char in enumerate(string):
-            if char == "-" and string[index+1] == "-":
-                inserts_i.append(index)
-        for i in reversed(inserts_i):
-            string = string[:i] + "p<" + string[i:]
-
-        return string

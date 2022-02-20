@@ -53,7 +53,123 @@ class LinkedList:
                 or issubclass(new_node, SinglyLinkedNode)):
             self._head_node = new_node
         else:
-            raise TypeError(f"new node: {str(new_node)} is not a compatible Node")
+            raise TypeError(
+                f"new node: {str(new_node)} is not a compatible Node")
+
+    def __len__(self) -> int:
+        """
+        Calculates number of nodes
+        time - O(n) - Linear time with length of list
+        space - O(1) from O(2) - Constant space with 2 extra variables
+
+        Returns:
+            int: number of nodes
+        """
+        length = 0
+        current_node = self.head_node
+        while current_node:
+            length += 1
+            current_node = current_node.next_node
+
+        return length
+
+    def __str__(self) -> str:
+        """ String representation
+        head is marked with (h)
+        next node is denoted with -->n
+        time - O(n) - Linear time
+        space - O(n) - string will get bigger with list size.
+
+        Returns:
+            str: [description]
+        """
+        string: str = ""
+        node_index = 0
+        current_node: Type[SinglyLinkedNode] = self.head_node
+        while current_node:
+            if node_index == 0:
+                tag = "(h)"
+            else:
+                tag = "-->n"
+            string += f"{tag}[{node_index}]:{str(current_node.value)}"
+            current_node = current_node.next_node
+            node_index += 1
+
+        return string
+
+    def __repr__(self) -> str:
+        """returns __str__
+        - time - see __str__
+        - space - see __str__
+
+        Returns:
+            str: output from __str__
+        """
+        return self.__str__()
+
+    def __iter__(self) -> Optional[Type[SinglyLinkedNode]]:
+        """Allows iteration
+        - time - O(1) - as just calling self.next
+        - space - O(1) - only creating 'current'
+
+        Returns:
+            Optional[Type[SinglyLinkedNode]]: yielded when iterating
+
+        Yields:
+            Iterator[Optional[Type[SinglyLinkedNode]]]: iteration of the object.
+        """
+
+        current = self.head_node
+        while current:
+            yield current
+            current = current.next_node
+
+    def __getitem__(self, index: int) -> Type[SinglyLinkedNode]:
+        """Implements indexing the linkedlist
+        - time - O(n) - iterates through list in linear fashion
+        - space - O(1) - O(3) - 3 variables created
+
+        Args:
+            index (int): index where value could be found
+
+        Raises:
+            IndexError: when index out of range
+
+        Returns:
+            Any: value at the given index.
+        """
+
+        while index < 0:
+            # Index is a negative, so addition will subtract.
+            index += len(self)
+        if index >= len(self):
+            raise IndexError(f"Index of {index} is out of "
+                             f"range for {self.__class__.__name__} of length {len(self)}")
+
+        current_index: int = 0
+        current = self.head_node
+        while current:
+            if index == current_index:
+                return current
+            current_index += 1
+            current = current.next_node
+
+    def __contains__(self, value: Any) -> bool:
+        """Implements the 'in' keyword
+        time - O(n) - Linear time iterates through list
+        space - O(1) - creates one variable 'i'
+
+
+        Args:
+            value (Any): Value to be found in the linkedlist
+
+        Returns:
+            bool: whether value found.
+        """
+        for i in self:
+            if i.value == value:
+                return True
+        return False
 
     def add_to_head(self, new_node_value: Any) -> None:
         """
@@ -158,118 +274,48 @@ class LinkedList:
         node1.next_node = node2.next_node
         node2.next_node = temp
 
-    def __len__(self) -> int:
-        """
-        Calculates number of nodes
-        time - O(n) - Linear time with length of list
-        space - O(1) from O(2) - Constant space with 2 extra variables
-
-        Returns:
-            int: number of nodes
-        """
-        length = 0
-        current_node = self.head_node
-        while current_node:
-            length += 1
-            current_node = current_node.next_node
-
-        return length
-
-    def __str__(self) -> str:
-        """ String representation
-        head is marked with (h)
-        next node is denoted with -->n
-        time - O(n) - Linear time
-        space - O(n) - string will get bigger with list size.
-
-        Returns:
-            str: [description]
-        """
-        string: str = ""
-        node_index = 0
-        current_node: Type[SinglyLinkedNode] = self.head_node
-        while current_node:
-            if node_index == 0:
-                tag = "(h)"
-            else:
-                tag = "-->n"
-            string += f"{tag}[{node_index}]:{str(current_node.value)}"
-            current_node = current_node.next_node
-            node_index += 1
-
-        return string
-
-
-    def __repr__(self) -> str:
-        """returns __str__
-        - time - see __str__
-        - space - see __str__
-
-        Returns:
-            str: output from __str__
-        """
-        return self.__str__()
-
-    def __iter__(self) -> Optional[Type[SinglyLinkedNode]]:
-        """Allows iteration
-        - time - O(1) - as just calling self.next
-        - space - O(1) - only creating 'current'
-
-        Returns:
-            Optional[Type[SinglyLinkedNode]]: yielded when iterating
-
-        Yields:
-            Iterator[Optional[Type[SinglyLinkedNode]]]: iteration of the object.
-        """
-
-        current = self.head_node
-        while current:
-            yield current
-            current = current.next_node
-
-    def __getitem__(self, index: int)->Type[SinglyLinkedNode]:
-        """Implements indexing the linkedlist
-        - time - O(n) - iterates through list in linear fashion
-        - space - O(1) - O(3) - 3 variables created
-
-        Args:
-            index (int): index where value could be found
-
-        Raises:
-            IndexError: when index out of range
-
-        Returns:
-            Any: value at the given index.
-        """
-
-        while index < 0:
-            # Index is a negative, so addition will subtract.
-            index += len(self)
-        if index >= len(self):
-            raise IndexError(f"Index of {index} is out of "
-                             f"range for {self.__class__.__name__} of length {len(self)}")
-
-        current_index: int = 0
-        current = self.head_node
-        while current:
-            if index == current_index:
-                return current
-            current_index += 1
-            current = current.next_node
-
-    def __contains__(self, value: Any)->bool:
-        """Implements the 'in' keyword
-        time - O(n) - Linear time iterates through list
-        space - O(1) - creates one variable 'i' 
+    def get_nth_last_node(self, n_nodes:int)->Optional[Type[SinglyLinkedNode]]:
+        """Originally on Codecademy 
         
+        Return
+        time - O(n) - Linear time, one loop two pointers
+        space - O(1) - Constant space as using two pointers.
 
         Args:
-            value (Any): Value to be found in the linkedlist
+            n_nodes (int): number of nodes from tail
 
         Returns:
-            bool: whether value found.
+            Optional[Type[SinglyLinkedNode]]: returns node object if
+        n < length of list. Otherwise returns None.
         """
-        for i in self:
-            if i.value == value:
-                return True
-        return False
+        current = None
+        tail_seeker = self.head_node
+        count = 0
+        while tail_seeker:
+            tail_seeker = tail_seeker.next_node
+            count += 1
+            if count >= n_nodes:
+                if current is None:
+                    current = self.head_node
+                else:
+                    current = current.get_next_node()
+        return current
+    
+    @property
+    def middle_node(self)->Type[SinglyLinkedNode]:
+        """Originally on Codecademy
+        Using Two pointer approach, find middle node.
+        time - O(n) - Linear time
+        space - O(1) - Two Variables
+
+        Returns:
+            Type[SinglyLinkedNode]: The middle Node
+        """
+        fast = self.head_node
+        slow = self.head_node
+        while fast:
+            fast = fast.next_node
+            if fast:
+                fast = fast.next_node
+                slow = slow.next_node
+        return slow
