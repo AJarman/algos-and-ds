@@ -5,7 +5,8 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "files.exclude": {
-        "*pycache*": true,
-        "*pytest*": true
+        "__pycache__": true,
+        "*pytest*": true,
+        "*.pyc":true
     }
 }
